@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Slider</title>
+
+    <!-- Importacion del jQuery -->
+    <script src="js/lib/jquery-2.1.4.min.js"></script>
+
+    <script src="js/lib/TweenMax.min.js"></script>
+
+    <!-- Importacion del Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container" align="center">
+      <h1>Slideshow</h1>
+      <hr />
+
+      <div class="slideShow"></div>
+
+      <br /><br />
+
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi molestiae
+      autem fugiat, quia nisi, corrupti est ut culpa aliquid necessitatibus, eum
+      sit eaque amet officiis ex cupiditate maiores animi facilis.
+    </div>
+
+    <script src="js/slideShow.js"></script>
+    <script>
+      $.slideShow({
+        slides: [
+          "img/slide1.png",
+          "img/slide2.png",
+          "img/slide3.png",
+          "img/slide4.png",
+        ],
+        intervalo: 2000,
+        velocidad: 1200,
+        color: "green",
+      });
+    </script>
+  </body>
+</html>

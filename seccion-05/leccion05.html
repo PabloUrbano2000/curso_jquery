@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Lección 05 - On y Bind</title>
+
+    <!-- Importacion del jQuery -->
+    <script src="js/lib/jquery-2.1.4.min.js"></script>
+
+    <!-- Importacion del Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Lección 05: On y Bind</h1>
+      <hr />
+
+      <h3>Click me!!</h3>
+    </div>
+    <script>
+      (function () {
+        var contador = 0;
+
+        // en el body bas a estar pendiente en los
+        // clicks de un h3 ejecuta la funcion
+        $("body").on("click", "h3", function () {
+          contador++;
+          var h3Dinamico = `<h3 id="h3-${contador}">Dinámico: ${contador}</h3><hr />`;
+          // último elemento hijo del body
+          //   $("body").append(h3Dinamico);
+          // Primer elemento hijo del body
+          //   $("body").prepend(h3Dinamico);
+
+          $(".container").append(h3Dinamico);
+
+          if (contador === 3) {
+            // crearle una funcion a un elemento
+            $("#h3-2").bind("click", function () {
+              console.log("Función dinámica");
+            });
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Presentacion de Vehículo</title>
+
+    <!-- Importacion del jQuery -->
+    <script src="js/lib/jquery-2.1.4.min.js"></script>
+
+    <!-- Importacion del Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container text-center">
+      <h1>Objetos Prácticos: <small>Ejemplo de vehículo</small></h1>
+      <hr />
+
+      <div class="divPreloader">
+        <img src="img/loading.gif" class="imgLoader img-responsive" />
+      </div>
+
+      <div class="divVistaPrevia">
+        <img id="imgCarro" class="img-responsive" />
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-5">
+          <select id="cmbColor" class="form-control"></select>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var teslaView = {
+          loader: $(".divPreloader"),
+
+          colores: ["blanco", "rojo"],
+
+          // Fucnion para cambiar el color
+          cambiarColor: function (img) {
+            const $loader = teslaView.loader;
+
+            // carga en 150 mili
+            $loader.fadeIn(150);
+
+            if (img === undefined) {
+              const color = teslaView.colores[0];
+              img = `img/tesla/modelS-${color}.jpg`;
+            }
+
+            $("<img>", {
+              src: img,
+              class: "img-responsive",
+            })
+              // con la funcion load sabemos cunado cargó la imagen
+              .load(function () {
+                $(".divVistaPrevia").find("img").remove();
+
+                $(this).appendTo(".divVistaPrevia");
+
+                // desaparece en 150 mili
+                $loader.fadeOut(150);
+              });
+          },
+
+          // funcion principal
+          init: function (opciones) {
+            // Agrega o reemplaza atributos a partir de parametros
+            $.extend(teslaView, opciones);
+
+            // ciclo para barrer todo el cbo de colores
+            for (let i = 0; i < this.colores.length; i++) {
+              const color = teslaView.colores[i];
+              $("<option>", {
+                value: color,
+                text: color,
+              }).appendTo("#cmbColor");
+            }
+
+            // nueva funcion del cambio
+            $("#cmbColor").bind("change", function () {
+              var color = $(this).val();
+              var url = `img/tesla/modelS-${color}.jpg`;
+
+              teslaView.cambiarColor(url);
+            });
+
+            // Cambiar la imagen por primera vez
+            teslaView.cambiarColor();
+          },
+        };
+
+        teslaView.init({
+          colores: ["rojo", "verde", "gris", "cafe", "negro", "blanco"],
+        });
+      })();
+    </script>
+  </body>
+</html>
